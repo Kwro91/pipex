@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load.c                                             :+:      :+:    :+:   */
+/*   ft_load.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 16:42:25 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:26:26 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_load_av(t_pipex *data, char **av)
+void	ft_load_av(t_pipex *data, int ac, char **av)
 {
-	data->cmd.file1 = av[1];
-	data->cmd.cmd1 = av[2];
-	data->cmd.cmd2 = av[3];
-	data->cmd.file2 = av[4];
+	data->file.file1 = av[1];
+	data->file.file2 = av[ac - 1];
+}
+
+void	ft_listload(t_pipex *data, char **av)
+{
+	data->lst = createlist(data->cmds, av + 2, data);
 }
 
 int	ft_load(t_pipex *data, int ac, char **av, char **env)
 {
 	int		i;
-
+	char	*envbis;
+	
+	envbis = "/usr/bin/env";
 	i = 0;
 	while (i < 5)
 	{
@@ -33,7 +38,8 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 	}
 	data->data.ac = ac;
 	data->cmds = ac - 3;
-	ft_load_av(data, av);
+	ft_listload(data, av);
+	ft_load_av(data, ac, av);
 	data->data.av = av;
 	if (env)
 		data->data.env = env;
@@ -42,7 +48,7 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 		data->data.env = malloc(sizeof(char *) * 2);
 		if (!data->data.env)
 			return (free(data->data.env), -1);
-		data->data.env[0] = "/usr/bin/env";
+		data->data.env[0] = ft_strdup(envbis);
 		data->data.env[1] = NULL;
 	}
 	data->fds[0] = 0;

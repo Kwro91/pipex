@@ -6,7 +6,7 @@
 #    By: besalort <besalort@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 14:19:30 by besalort          #+#    #+#              #
-#    Updated: 2023/05/05 16:20:11 by besalort         ###   ########.fr        #
+#    Updated: 2023/05/05 17:52:06 by besalort         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,13 @@ NAME = pipex
 
 SRC = ./src/pipex.c \
 	./src/ft_free.c \
-	./src/check.c \
+	./src/ft_check.c \
 	./src/ft_path.c \
-	./src/load.c \
+	./src/ft_load.c \
 	./src/ft_access.c \
-	./src/processes.c \
+	./src/ft_processes.c \
 	./src/ft_cmd.c \
+	./src/ft_list.c \
 
 LIBFT = $(LIBFT_PATH)libft.a
 

@@ -6,24 +6,24 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:40:12 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 16:42:43 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:22:04 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_command(t_pipex *data)
+char	**ft_command(char *command)
 {
 	char	*ptr;
+	char	**commandp;
 
-	ptr = ft_strchr(data->cmd.cmd1, ' ');
+	ptr = ft_strchr(command, ' ');
 	if (ptr != NULL)
-		data->cmd.command1 = ft_split(data->cmd.cmd1, ' ');
+		commandp = ft_split(command, ' ');
 	else
-		data->cmd.command1 = ft_calloc(2, 1);
-	ptr = ft_strchr(data->cmd.cmd2, ' ');
-	if (ptr != NULL)
-		data->cmd.command2 = ft_split(data->cmd.cmd2, ' ');
-	else
-		data->cmd.command2 = ft_calloc(2, 1);
+	{
+		commandp = ft_calloc(2, 1);
+		commandp[0] = ft_strdup(command);
+	}
+	return (commandp);
 }

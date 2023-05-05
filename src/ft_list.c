@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_list.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 16:08:01 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:21:36 by besalort         ###   ########.fr       */
+/*   Created: 2023/05/05 17:30:21 by besalort          #+#    #+#             */
+/*   Updated: 2023/05/05 18:25:44 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_free_paths(char **paths)
+t_lst	*createlist(int size, char **command, t_pipex *data)
 {
-	int	i;
+	t_lst	*newlst;
 
-	i = 0;
-	while (paths[i])
+	newlst = NULL;
+	if (size > 0)
 	{
-		free(paths[i]);
-		i++;
+		newlst = malloc(sizeof(t_lst));
+		if  (!newlst)
+			return (NULL);
+		newlst->cmd = command[0];
+		newlst->command = ft_command(command[0]);
+		newlst->next = createlist(size - 1, command + 1, data);
+		if (newlst->next == NULL && (size -1) > 0)
+			return	(free(newlst), NULL);
 	}
-	if (paths)
-		free(paths);
-}
-
-void	ft_free(t_pipex *data)
-{
-	if (data->paths)
-		ft_free_paths(data->paths);
-	if (data->infile > 0)
-		close(data->infile);
-	if (data->outfile > 0)
-		close(data->outfile);
-	exit(0);
+	return (newlst);
 }
