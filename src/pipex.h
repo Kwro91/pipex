@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:30:29 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:26:48 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_data
 
 typedef struct s_file
 {
-	char	*file1;
-	char	*file2;
+	char	*file;
+	int		fd;
 }	t_file;
 
 typedef struct s_pipex
@@ -48,7 +48,8 @@ typedef struct s_pipex
 	int			fds[2];
 	char		**paths;
 	pid_t		child[2];
-	t_file		file;
+	t_file		file1;
+	t_file		file2;
 	t_lst		*lst;
 	t_data		data;
 }	t_pipex;
@@ -77,5 +78,5 @@ void	ft_pipex(int ac, char **av, char **env);
 void	ft_msg(char *msg);
 // PROCESSES.C //
 void	algo(t_pipex *data);
-void	ft_processes(t_pipex *data, char **cmdp, char *cmd, int last);
+void	ft_processes(t_pipex *data, char **cmdp, int last);
 #endif

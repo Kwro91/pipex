@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:18:52 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:21:06 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:46:18 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_pipex(int ac, char **av, char **env)
 	if (ft_load(&data, ac, av, env) == -1)
 		return (ft_msg("Error, argument\n"));
 	ft_path_complete(&data, ft_path(env));
-	if (ft_check_files(&data, data.file.file1, data.file.file2) == -1)
+	if (ft_check_files(&data, data.file1.file, data.file2.file) == -1)
 		return (ft_msg("Error, file\n"));
 	algo(&data);
 	return (ft_free(&data));

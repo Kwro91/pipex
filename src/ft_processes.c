@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:00:04 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:41:04 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:32:25 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,52 @@
 
 void	algo(t_pipex *data)
 {
-	int	last;
+	int	i;
 
-	last = 0;
+	i = 0;
+	pipe(data->fds);
 	while (data->lst)
 	{
 		if (data->lst->next == NULL)
-			last = 1;
-		ft_processes(data, data->lst->command, data->lst->cmd, last);
+			ft_processes(data, data->lst->command, 1);
+		else
+			ft_processes(data, data->lst->command, 0);
 		data->lst = data->lst->next;
+	}
+	while (i < data->cmds)
+	{
+		wait(NULL);
+		i++;
 	}
 }
 
-void	ft_processes(t_pipex *data, char **cmdp, char *cmd, int last)
+void	ft_processes(t_pipex *data, char **cmdp, int last)
 {
 	int		pid;
-	int		fd;
 
-	fd = 0;
 	pid = fork();
-	(void)cmd;
 	if (pid == 0)
 	{
 		if (last == 1)
 		{
-			printf("CECI NE S'AFFICHE QU'A LA DERNIERE COMMANDE\n");
+			close(data->fds[1]);
+			dup2(data->fds[0], 0);
+			dup2(data->file2.fd, 1);
+			// close(data->fds[0]);
+			ft_printf("CECI NE S'AFFICHE QU'A LA DERNIERE COMMANDE\n");
 		}
 		else
 		{
-			fd = open("temporary_file", O_RDWR
-				| O_CREAT, S_IRWXU);
-			dup2(fd, 1);
+			close(data->fds[0]);
+			dup2(data->file1.fd, 0);
+			dup2(data->fds[1], 1);
 		}
 		execve(ft_access_cmd(data, cmdp[0]), cmdp, data->data.env);
-		close(fd);
 	}
-	wait(NULL);
+	ft_putstr_fd("salut fils\n", data->fds[1]);
+	if (last == 0)
+	{
+		close(data->fds[0]);
+		close(data->fds[1]);
+	}
 }

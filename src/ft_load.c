@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:26:26 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:46:49 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_load_av(t_pipex *data, int ac, char **av)
 {
-	data->file.file1 = av[1];
-	data->file.file2 = av[ac - 1];
+	data->file1.file = av[1];
+	data->file2.file = av[ac - 1];
 }
 
 void	ft_listload(t_pipex *data, char **av)
