@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:00:04 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/12 16:36:10 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:54:16 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 void	run_processes(t_pipex *data)
 {
 	int	i;
+	t_lst *tmp;
 
+	tmp = data->lst;
 	i = 0;
 	pipe(data->fds);
-	while (data->lst)
+	while (tmp)
 	{
-		if (data->lst->next == NULL)
-			ft_processes(data, data->lst->command, 1);
+		if (tmp->next == NULL)
+			ft_processes(data, tmp->command, 1);
 		else
-			ft_processes(data, data->lst->command, 0);
-		data->lst = data->lst->next;
+			ft_processes(data, tmp->command, 0);
+		tmp = tmp->next;
 	}
 	
 	while (i < data->cmds)
