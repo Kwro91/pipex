@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:40:12 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:22:04 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:11:18 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_command(char *command)
 		commandp = ft_split(command, ' ');
 	else
 	{
-		commandp = ft_calloc(2, 1);
+		commandp = ft_calloc(2, sizeof(char *));
 		commandp[0] = ft_strdup(command);
 	}
 	return (commandp);
