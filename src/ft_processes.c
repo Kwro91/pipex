@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:00:04 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/12 15:53:44 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:36:10 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	run_processes(t_pipex *data)
 
 	i = 0;
 	pipe(data->fds);
-	printf("PARENT = 1er %i, 2eme %i\n", data->fds[0], data->fds[1]);
 	while (data->lst)
 	{
 		if (data->lst->next == NULL)
@@ -49,19 +48,15 @@ void	ft_processes(t_pipex *data, char **cmdp, int last)
 	{
 		if (last == 1)
 		{
-			printf("DERNIER ENFANT = 1er %i, 2eme %i\n", data->fds[0], data->fds[1]);
 			close(data->fds[1]);
 			dup2(data->fds[0], 0);
 			dup2(data->file2.fd, 1);
-			//close(data->fds[0]);
 		}
 		else
 		{
-			printf("ENFANT = 1er %i, 2eme %i\n", data->fds[0], data->fds[1]);
 			close(data->fds[0]);
 			dup2(data->file1.fd, 0);
 			dup2(data->fds[1], 1);
-			//close(data->fds[1]);
 		}
 		execve(ft_access_cmd(data, cmdp[0]), cmdp, data->data.env);
 	}
