@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:06:15 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 17:13:57 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:05:44 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ char	**ft_path(char **env)
 	int	i;
 
 	i = 0;
-	if (env)
-		while (env[i])
-		{
-			if (ft_strncmp(env[i], "PATH=", 5) == 0)
-				return (ft_split(env[i] + 5, ':'));
-			i++;
-		}
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+			return (ft_split(env[i] + 5, ':'));
+		i++;
+	}
 	return (ft_msg("ERROR NO ENVIRONMENT\n"), NULL);
 }
 

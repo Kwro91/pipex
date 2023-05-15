@@ -6,16 +6,24 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:08:01 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/12 16:55:09 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:34:00 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	close_give_fd(int fd1, int fd2)
+{
+	close(fd1);
+	close(fd2);
+}
+
 void	close_fds(t_pipex *data)
 {
-	close(data->file1.fd);
-	close(data->file2.fd);
+	if (data->file1.fd >= 0)
+		close(data->file1.fd);
+	if (data->file2.fd >= 0)
+		close(data->file2.fd);
 }
 
 void	delete_list(t_lst *lst)
@@ -44,10 +52,6 @@ void	ft_free(t_pipex *data)
 {
 	if (data->paths)
 		ft_free_paths(data->paths);
-	if (data->infile >= 0)
-		close(data->infile);
-	if (data->outfile >= 0)
-		close(data->outfile);
 	if (data->lst)
 		delete_list(data->lst);
 	close_fds(data);

@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/12 15:39:40 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:30:38 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ typedef struct s_file
 
 typedef struct s_pipex
 {
-	int			infile;
-	int			outfile;
 	int			cmds;
 	int			fds[2];
 	char		**paths;
@@ -54,14 +52,14 @@ typedef struct s_pipex
 	t_data		data;
 }	t_pipex;
 // FT_CHECK.C //
-int		ft_check_files(t_pipex *data, char *file1, char *file2);
-int		ft_open_files(t_pipex *data, char *file1, char *file2);
+void	ft_open_files(t_pipex *data, char *file1, char *file2);
 // FT_ACCESS.C //
 char	*ft_access_cmd(t_pipex *data, char *cmd);
 char	*ft_modify_cmd(char *cmd);
 // FT_CMD.C //
 char	**ft_command(char *coammand);
 // FT_FREE.C //
+void	close_give_fd(int fd1, int fd2);
 void	close_fds(t_pipex *data);
 void	delete_list(t_lst *lst);
 void	ft_free_paths(char **paths);
@@ -74,6 +72,7 @@ t_lst	*createlist(int size, char **command, t_pipex *data);
 // FT_LOAD.C //
 void	ft_listload(t_pipex *data, char **av);
 void	ft_load_av(t_pipex *data, int ac, char **av);
+void	ft_load_env(t_pipex *data, char **env);
 int		ft_load(t_pipex *data, int ac, char **av, char **env);
 // FT_pipex.C //
 void	ft_pipex(int ac, char **av, char **env);

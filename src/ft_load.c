@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/08 15:46:49 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:41:56 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,31 @@ void	ft_listload(t_pipex *data, char **av)
 	data->lst = createlist(data->cmds, av + 2, data);
 }
 
+void	ft_load_env(t_pipex *data, char **env)
+{
+	char	*envbis;
+
+	envbis = "/usr/bin/env";
+	if (env)
+		data->data.env = env;
+	else
+	{
+		data->data.env = malloc(sizeof(char *) * 2);
+		if (!data->data.env)
+		{
+			free(data->data.env[0]);
+			free(data->data.env[1]);
+			return (free(data->data.env));
+		}
+		data->data.env[0] = ft_strdup(envbis);
+		data->data.env[1] = NULL;
+	}
+}
+
 int	ft_load(t_pipex *data, int ac, char **av, char **env)
 {
 	int		i;
-	char	*envbis;
-	
-	envbis = "/usr/bin/env";
+
 	i = 0;
 	while (i < 5)
 	{
@@ -41,16 +60,7 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 	ft_listload(data, av);
 	ft_load_av(data, ac, av);
 	data->data.av = av;
-	if (env)
-		data->data.env = env;
-	else
-	{
-		data->data.env = malloc(sizeof(char *) * 2);
-		if (!data->data.env)
-			return (free(data->data.env), -1);
-		data->data.env[0] = ft_strdup(envbis);
-		data->data.env[1] = NULL;
-	}
+	ft_load_env(data, env);
 	data->fds[0] = 0;
 	return (1);
 }
