@@ -6,7 +6,7 @@
 #    By: besalort <besalort@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 14:19:30 by besalort          #+#    #+#              #
-#    Updated: 2023/05/05 17:52:06 by besalort         ###   ########.fr        #
+#    Updated: 2023/05/16 16:42:08 by besalort         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = ./src/pipex.c \
 	./src/ft_processes.c \
 	./src/ft_cmd.c \
 	./src/ft_list.c \
+	./src/ft_run.c \
 
 LIBFT = $(LIBFT_PATH)libft.a
 

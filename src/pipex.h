@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/15 17:30:38 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:15:02 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_file
 typedef struct s_pipex
 {
 	int			cmds;
-	int			fds[2];
+	int			pipes[2];
+	int			fd_in;
 	char		**paths;
 	pid_t		child[2];
 	t_file		file1;
@@ -78,6 +79,12 @@ int		ft_load(t_pipex *data, int ac, char **av, char **env);
 void	ft_pipex(int ac, char **av, char **env);
 void	ft_msg(char *msg);
 // PROCESSES.C //
+void	ft_first_process(t_pipex *data, char **cmdp, int pipes[2]);
+void	ft_last_process(t_pipex *data, char **cmdp, int pipes[2]);
+void	ft_processes(t_pipex *data, char **cmdp, int pipes[2]);
+// FT_RUN.C //
+void	run_first(t_pipex *data, t_lst *tmp);
+t_lst	*run_other(t_pipex *data, t_lst *tmp);
+void	run_last(t_pipex *data, t_lst *tmp);
 void	run_processes(t_pipex *data);
-void	ft_processes(t_pipex *data, char **cmdp, int last);
 #endif

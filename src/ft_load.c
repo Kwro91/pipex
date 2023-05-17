@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/15 17:41:56 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:30:40 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 	ft_load_av(data, ac, av);
 	data->data.av = av;
 	ft_load_env(data, env);
-	data->fds[0] = 0;
 	return (1);
 }
