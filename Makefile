@@ -6,7 +6,7 @@
 #    By: besalort <besalort@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 14:19:30 by besalort          #+#    #+#              #
-#    Updated: 2023/05/16 16:42:08 by besalort         ###   ########.fr        #
+#    Updated: 2023/05/24 17:06:14 by besalort         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 
 SRC = ./src/pipex.c \
 	./src/ft_free.c \
-	./src/ft_check.c \
+	./src/ft_open.c \
 	./src/ft_path.c \
 	./src/ft_load.c \
 	./src/ft_access.c \

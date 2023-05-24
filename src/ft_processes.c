@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:00:04 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/17 17:49:14 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:25:23 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_first_process(t_pipex *data, char **cmdp, int pipes[2])
 		return (perror("Error fork\n"), ft_free(data));
 	else if (pid == 0)
 	{
-		if (data->fd_in>= 0)
+		if (data->fd_in >= 0)
 		{
 			if (dup2(data->fd_in, 0) < 0)
 				return (perror("Error dup2\n"), ft_free(data));
@@ -34,7 +34,6 @@ void	ft_first_process(t_pipex *data, char **cmdp, int pipes[2])
 	}
 }
 
-
 void	ft_processes(t_pipex *data, char **cmdp, int pipes[2])
 {
 	int		pid;
@@ -44,7 +43,7 @@ void	ft_processes(t_pipex *data, char **cmdp, int pipes[2])
 		return (perror("Error fork\n"), ft_free(data));
 	else if (pid == 0)
 	{
-		if (dup2(data->fd_in, 0) < 0 || dup2(pipes[1], 0) < 0)
+		if (dup2(data->fd_in, 0) < 0 || dup2(pipes[1], 1) < 0)
 			return (perror("Error dup2\n"), ft_free(data));
 		close(data->fd_in);
 		close_give_fd(pipes[1], pipes[0]);
