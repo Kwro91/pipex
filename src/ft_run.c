@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:32:19 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/17 17:44:11 by besalort         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:00:22 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	run_first(t_pipex *data, t_lst *tmp)
 		return (perror("Error pipe\n"), ft_free(data));
 	ft_first_process(data, tmp->command, data->pipes);
 	close(data->pipes[1]);
+	close (data->fd_in);
 	data->fd_in = data->pipes[0];
 }
 
@@ -28,8 +29,8 @@ t_lst	*run_other(t_pipex *data, t_lst *tmp)
 		if (pipe(data->pipes) < 0)
 			return (perror("Error pipe\n"), ft_free(data), tmp);
 		ft_processes(data, tmp->command, data->pipes);
-		close(data->fd_in);
 		close(data->pipes[1]);
+		close(data->fd_in);
 		data->fd_in = data->pipes[0];
 		tmp = tmp->next;
 	}
@@ -46,8 +47,10 @@ void	run_last(t_pipex *data, t_lst *tmp)
 void	run_processes(t_pipex *data)
 {
 	int		i;
+	int		status;
 	t_lst	*tmp;
 
+	i = 0;
 	data->fd_in = data->file1.fd;
 	tmp = data->lst;
 	run_first(data, tmp);
@@ -56,7 +59,7 @@ void	run_processes(t_pipex *data)
 	run_last(data, tmp);
 	while (i < data->cmds)
 	{
-		wait(NULL);
+		wait(&status);
 		if (i == 0)
 		{
 			close(data->pipes[1]);
