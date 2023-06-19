@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/17 17:30:40 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:41:27 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ void	ft_load_av(t_pipex *data, int ac, char **av)
 
 void	ft_listload(t_pipex *data, char **av)
 {
-	data->lst = createlist(data->cmds, av + 2, data);
+	int moving;
+
+	moving = 2;
+	if (data->here_doc == 1)
+		moving = 3;
+	data->lst = createlist(data->cmds, av + moving, data);
 }
 
 void	ft_load_env(t_pipex *data, char **env)
@@ -56,10 +61,20 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 		i++;
 	}
 	data->data.ac = ac;
-	data->cmds = ac - 3;
+	data->data.av = av;
+	if (ft_check_here_doc(data) != 0)
+	{
+		data->cmds = ac - 3;
+		data->here_doc = 0;
+	}
+	else
+	{
+		data->cmds = ac - 4;
+		data->here_doc = 1;
+		ft_here_doc(data);
+	}
 	ft_listload(data, av);
 	ft_load_av(data, ac, av);
-	data->data.av = av;
 	ft_load_env(data, env);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/31 17:57:01 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:28:57 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ typedef struct s_pipex
 	int			cmds;
 	int			pipes[2];
 	int			fd_in;
+	int			here_doc;
 	char		**paths;
+	char		*eof;
 	pid_t		child[2];
 	t_file		file1;
 	t_file		file2;
@@ -65,6 +67,9 @@ void	close_fds(t_pipex *data);
 void	delete_list(t_lst *lst);
 void	ft_free_paths(char **paths);
 void	ft_free(t_pipex *data);
+// FT_HERE_DOC.C //
+int		ft_check_here_doc(t_pipex *data);
+void	ft_here_doc(t_pipex *data);
 // FT_PATH.C //
 char	**ft_path(char **env);
 void	ft_path_complete(t_pipex *data, char **paths);
