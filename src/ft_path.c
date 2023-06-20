@@ -23,7 +23,7 @@ char	**ft_path(char **env)
 			return (ft_split(env[i] + 5, ':'));
 		i++;
 	}
-	return (ft_msg("ERROR NO ENVIRONMENT\n"), NULL);
+	return (ft_msg("Error, no environment\n"), NULL);
 }
 
 void	ft_path_complete(t_pipex *data, char **paths)
