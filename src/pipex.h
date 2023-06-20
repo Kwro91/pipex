@@ -63,7 +63,7 @@ char	*ft_modify_cmd(char *cmd);
 char	**ft_command(char *coammand);
 // FT_FREE.C //
 void	close_give_fd(int fd1, int fd2);
-void	close_fds(t_pipex *data);
+void	ft_free_here_doc(t_pipex *data);
 void	delete_list(t_lst *lst);
 void	ft_free_paths(char **paths);
 void	ft_free(t_pipex *data);

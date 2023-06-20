@@ -14,16 +14,10 @@
 
 void	close_give_fd(int fd1, int fd2)
 {
-	close(fd1);
-	close(fd2);
-}
-
-void	close_fds(t_pipex *data)
-{
-	if (data->file1.fd >= 0)
-		close(data->file1.fd);
-	if (data->file2.fd >= 0)
-		close(data->file2.fd);
+	if (fd1 >= 0)
+		close(fd1);
+	if (fd2 >= 0)
+		close(fd2);
 }
 
 void	delete_list(t_lst *lst)
@@ -48,19 +42,28 @@ void	ft_free_paths(char **paths)
 		free(paths);
 }
 
-void	ft_free(t_pipex *data)
+void	ft_free_here_doc(t_pipex *data)
 {
 	int fd;
-	if (data->paths)
-		ft_free_paths(data->paths);
-	if (data->lst)
-		delete_list(data->lst);
-	close_fds(data);
+
 	fd =open(".here_doc_tmp", O_RDONLY);
 	if (fd > 0)
 	{
 		close(fd);
 		unlink(".here_doc_tmp");
 	}
+	if (data->here_doc == 1)
+		free(data->eof);
+}
+
+void	ft_free(t_pipex *data)
+{
+	
+	if (data->paths)
+		ft_free_paths(data->paths);
+	if (data->lst)
+		delete_list(data->lst);
+	close_give_fd(data->file1.fd, data->file2.fd);
+	ft_free_here_doc(data);
 	exit(0);
 }

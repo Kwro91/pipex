@@ -16,15 +16,19 @@ int	ft_check_here_doc(t_pipex *data)
 {
 	char	*s1;
 	char	*s2;
+	int 	cmp;
 
 	s1 = ft_strdup(data->data.av[1]);
 	s2 = "here_doc";
-	return (ft_strncmp(s1, s2, ft_strlen(s1)));
+	cmp = ft_strncmp(s1, s2, ft_strlen(s1));
+	free(s1);
+	return (cmp);
 }
 
 void	ft_here_doc(t_pipex *data)
 {
 	char	*line;
+
 	data->eof = ft_strdup(data->data.av[2]);
 	data->file1.fd = open(".here_doc_tmp",
 			O_CREAT | O_WRONLY | O_TRUNC, 0000644);
