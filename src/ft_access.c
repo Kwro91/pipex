@@ -46,5 +46,7 @@ char	*ft_access_cmd(t_pipex *data, char *cmd)
 		free(tmp);
 		i++;
 	}
-	return (NULL);
+	join = ft_strjoin("command not found: ", cmd);
+	perror(join);
+	return (free(join), NULL);
 }
