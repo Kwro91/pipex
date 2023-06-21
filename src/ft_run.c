@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:32:19 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/19 13:27:40 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:23:13 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_lst	*run_other(t_pipex *data, t_lst *tmp)
 {
 	while (tmp->next)
 	{
+		fprintf(stderr, "%s\n", tmp->cmd);
 		if (pipe(data->pipes) < 0)
 			return (perror("Error pipe\n"), ft_free(data), tmp);
 		ft_processes(data, tmp->command, data->pipes);

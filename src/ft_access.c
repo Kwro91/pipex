@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:44:57 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/05 18:41:17 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:28:37 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char	*ft_access_cmd(t_pipex *data, char *cmd)
 		free(tmp);
 		i++;
 	}
-	join = ft_strjoin("command not found: ", cmd);
-	perror(join);
-	return (free(join), NULL);
+	tmp = ft_strjoin(": command not found: ", cmd);
+	join = ft_strjoin(tmp, "\n");
+	ft_msg(join);
+	return (free(join), free(tmp), NULL);
 }
