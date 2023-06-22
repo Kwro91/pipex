@@ -48,7 +48,6 @@ void	run_last(t_pipex *data, t_lst *tmp)
 void	run_processes(t_pipex *data)
 {
 	int		i;
-	int		status;
 	t_lst	*tmp;
 
 	i = 0;
@@ -60,7 +59,7 @@ void	run_processes(t_pipex *data)
 	run_last(data, tmp);
 	while (i < data->cmds)
 	{
-		wait(&status);
+		wait(&data->status);
 		if (i == 0)
 		{
 			close(data->pipes[1]);

@@ -42,7 +42,7 @@ typedef struct s_file
 
 typedef struct s_pipex
 {
-	int			error;
+	int			status;
 	int			cmds;
 	int			pipes[2];
 	int			fd_in;
@@ -82,7 +82,7 @@ void	ft_load_av(t_pipex *data, int ac, char **av);
 void	ft_load_env(t_pipex *data, char **env);
 int		ft_load(t_pipex *data, int ac, char **av, char **env);
 // FT_PIPEX.C //
-void	ft_pipex(int ac, char **av, char **env);
+int		ft_pipex(int ac, char **av, char **env);
 void	ft_msg(char *msg);
 // PROCESSES.C //
 void	ft_first_process(t_pipex *data, char **cmdp, int pipes[2]);

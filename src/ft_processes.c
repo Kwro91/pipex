@@ -32,7 +32,7 @@ void	ft_first_process(t_pipex *data, char **cmdp, int pipes[2])
 		if (dup2(pipes[1], 1) < 0)
 			return (ft_free(data));
 		close_give_fd(pipes[1], pipes[0]);
-		if(execve(path, cmdp, data->data.env))
+		if (execve(path, cmdp, data->data.env) < 0)
 			exit(0);
 	}
 }
@@ -52,7 +52,7 @@ void	ft_processes(t_pipex *data, char **cmdp, int pipes[2])
 			return (ft_free(data));
 		close(data->fd_in);
 		close_give_fd(pipes[1], pipes[0]);
-		if(execve(path, cmdp, data->data.env) < 0)
+		if (execve(path, cmdp, data->data.env) < 0)
 			exit(0);
 	}
 }
@@ -72,7 +72,7 @@ void	ft_last_process(t_pipex *data, char **cmdp, int pipes[2])
 			return (ft_free(data));
 		close(data->fd_in);
 		close_give_fd(pipes[1], pipes[0]);
-		if(execve(path, cmdp, data->data.env) < 0)
+		if (execve(path, cmdp, data->data.env) < 0)
 			exit(0);
 	}
 }
