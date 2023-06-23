@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:51:40 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/19 17:41:27 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:57:00 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_load_av(t_pipex *data, int ac, char **av)
 
 void	ft_listload(t_pipex *data, char **av)
 {
-	int moving;
+	int	moving;
 
 	moving = 2;
 	if (data->here_doc == 1)
@@ -32,8 +32,8 @@ void	ft_load_env(t_pipex *data, char **env)
 {
 	char	*envbis;
 
-	envbis = "/usr/bin/env";
-	if (env)
+	envbis = "";
+	if (*env)
 		data->data.env = env;
 	else
 	{
@@ -46,6 +46,24 @@ void	ft_load_env(t_pipex *data, char **env)
 		}
 		data->data.env[0] = ft_strdup(envbis);
 		data->data.env[1] = NULL;
+		data->is_env = -1;
+	}
+}
+
+void	ft_load_values(t_pipex *data, int ac, char **av)
+{
+	data->data.ac = ac;
+	data->data.av = av;
+	if (ft_check_here_doc(data) != 0)
+	{
+		data->cmds = ac - 3;
+		data->here_doc = 0;
+	}
+	else
+	{
+		data->cmds = ac - 4;
+		data->here_doc = 1;
+		ft_here_doc(data);
 	}
 }
 
@@ -60,19 +78,7 @@ int	ft_load(t_pipex *data, int ac, char **av, char **env)
 			return (-1);
 		i++;
 	}
-	data->data.ac = ac;
-	data->data.av = av;
-	if (ft_check_here_doc(data) != 0)
-	{
-		data->cmds = ac - 3;
-		data->here_doc = 0;
-	}
-	else
-	{
-		data->cmds = ac - 4;
-		data->here_doc = 1;
-		ft_here_doc(data);
-	}
+	ft_load_values(data, ac, av);
 	ft_listload(data, av);
 	ft_load_av(data, ac, av);
 	ft_load_env(data, env);

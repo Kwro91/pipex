@@ -88,6 +88,6 @@ char	*get_next_line(int fd);
 
 ////////////////////FT_PRINTF /////////////////////////
 
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 #endif

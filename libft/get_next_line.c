@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:16:53 by besalort          #+#    #+#             */
-/*   Updated: 2023/04/07 13:42:01 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:00:57 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static	char	*ft_verif(char **stock, int nb, int fd, char **line)
 		return (NULL);
 	return (ft_newline(stock, line));
 }
-
 
 char	*get_next_line(int fd)
 {

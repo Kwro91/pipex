@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/21 15:27:00 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:00:27 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_file
 typedef struct s_pipex
 {
 	int			status;
+	int			is_env;
 	int			cmds;
 	int			pipes[2];
 	int			fd_in;
@@ -80,6 +81,7 @@ t_lst	*createlist(int size, char **command, t_pipex *data);
 void	ft_listload(t_pipex *data, char **av);
 void	ft_load_av(t_pipex *data, int ac, char **av);
 void	ft_load_env(t_pipex *data, char **env);
+void	ft_load_values(t_pipex *data, int ac, char **av);
 int		ft_load(t_pipex *data, int ac, char **av, char **env);
 // FT_PIPEX.C //
 int		ft_pipex(int ac, char **av, char **env);

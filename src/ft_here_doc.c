@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:41:29 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/19 17:54:40 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:59:19 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_check_here_doc(t_pipex *data)
 {
 	char	*s1;
 	char	*s2;
-	int 	cmp;
+	int		cmp;
 
 	s1 = ft_strdup(data->data.av[1]);
 	s2 = "here_doc";

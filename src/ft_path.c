@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:06:15 by besalort          #+#    #+#             */
-/*   Updated: 2023/05/15 17:05:44 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:58:42 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**ft_path(char **env)
 			return (ft_split(env[i] + 5, ':'));
 		i++;
 	}
-	return (NULL);
+	return (env);
 }
 
 void	ft_path_complete(t_pipex *data, char **paths)
@@ -31,8 +31,6 @@ void	ft_path_complete(t_pipex *data, char **paths)
 	int	i;
 
 	i = 0;
-	if (!paths)
-		ft_free(data); //DOIT LANCER LES COMMANDES SELON LES PATHS DE BASES PLUTOT QUE CA
 	while (paths[i])
 		i++;
 	data->paths = ft_calloc(sizeof(char *), (i + 1));
@@ -48,5 +46,6 @@ void	ft_path_complete(t_pipex *data, char **paths)
 		free(paths[i]);
 		i++;
 	}
-	free(paths);
+	if (paths)
+		free(paths);
 }
