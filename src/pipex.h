@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 17:00:27 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:46:17 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		ft_check_here_doc(t_pipex *data);
 void	ft_here_doc(t_pipex *data);
 // FT_PATH.C //
 char	**ft_path(char **env);
+void	ft_path_no_environement(t_pipex *data);
 void	ft_path_complete(t_pipex *data, char **paths);
 // FT_LIST.C //
 t_lst	*createlist(int size, char **command, t_pipex *data);
