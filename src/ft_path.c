@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:06:15 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 16:58:42 by besalort         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:09:33 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**ft_path(char **env)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (env[i])
@@ -23,7 +23,18 @@ char	**ft_path(char **env)
 			return (ft_split(env[i] + 5, ':'));
 		i++;
 	}
-	return (env);
+	return (NULL);
+}
+
+void	ft_path_no_environement(t_pipex *data)
+{
+	data->paths = ft_calloc(sizeof(char *), 2);
+	if (!data->paths)
+		ft_free(data);
+	data->paths[0] = ft_strdup("");
+	if (!data->paths[0])
+		ft_free(data);
+	data->paths[1] = NULL;
 }
 
 void	ft_path_complete(t_pipex *data, char **paths)
@@ -31,12 +42,15 @@ void	ft_path_complete(t_pipex *data, char **paths)
 	int	i;
 
 	i = 0;
+	if (!paths)
+		return (ft_path_no_environement(data));
 	while (paths[i])
 		i++;
 	data->paths = ft_calloc(sizeof(char *), (i + 1));
 	if (!data->paths)
 		ft_free(data);
-	data->paths[i] = NULL;
+	if (paths == NULL || *paths == NULL)
+		return ;
 	i = 0;
 	while (paths[i])
 	{
