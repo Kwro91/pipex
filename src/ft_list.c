@@ -6,13 +6,13 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:30:21 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/04 15:52:35 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:42:29 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-t_lst	*createlist(int size, char **command, t_pipex *data)
+t_lst	*createlist(int size, char **command)
 {
 	t_lst	*newlst;
 
@@ -24,7 +24,7 @@ t_lst	*createlist(int size, char **command, t_pipex *data)
 			return (NULL);
 		newlst->cmd = command[0];
 		newlst->command = ft_command(command[0]);
-		newlst->next = createlist(size - 1, command + 1, data);
+		newlst->next = createlist(size - 1, command + 1);
 		if (newlst->next == NULL && (size -1) > 0)
 			return (free(newlst), NULL);
 	}
