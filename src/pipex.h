@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 18:46:17 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:32:29 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	ft_open_files(t_pipex *data, char *file1, char *file2);
 char	*ft_access_cmd(t_pipex *data, char *cmd);
 char	*ft_modify_cmd(char *cmd);
 // FT_CMD.C //
-char	**ft_command(char *coammand);
+char	**ft_command(char *command);
 // FT_FREE.C //
 void	close_give_fd(int fd1, int fd2);
-void	ft_free_here_doc(t_pipex *data);
+void	ft_free_here_doc();
 void	delete_list(t_lst *lst);
 void	ft_free_paths(char **paths);
 void	ft_free(t_pipex *data);

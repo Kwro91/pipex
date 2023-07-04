@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:06:15 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 18:09:33 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:01:27 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_path_complete(t_pipex *data, char **paths)
 		free(paths[i]);
 		i++;
 	}
+	data->paths[i] = NULL;
 	if (paths)
 		free(paths);
 }

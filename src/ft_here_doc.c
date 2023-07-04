@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:41:29 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 16:59:19 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:40:20 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	ft_here_doc(t_pipex *data)
 		free(line);
 	}
 	free(line);
+	free(data->eof);
 	close(data->file1.fd);
 }
