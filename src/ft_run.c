@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:32:19 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/23 18:44:22 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:50:41 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	run_processes(t_pipex *data)
 {
 	int		i;
 	int		status;
-	pid_t	pid;
 	t_lst	*tmp;
 
 	i = 0;
-	pid = 0;
 	status = 0;
 	data->fd_in = data->file1.fd;
 	tmp = data->lst;
@@ -62,7 +60,7 @@ void	run_processes(t_pipex *data)
 	run_last(data, tmp);
 	while (i < data->cmds)
 	{
-		waitpid(pid, &status, 0);
+		waitpid(-1, &status, 0);
 		if (i == 0)
 		{
 			close(data->pipes[1]);
@@ -70,7 +68,8 @@ void	run_processes(t_pipex *data)
 		}
 		i++;
 	}
-	// if (WIFEXITED (status))
-	// 	data->status = WEXITSTATUS(status);
-	// fprintf(stderr, "the status is %i\n", data->status);
+	if (WIFEXITED (status))
+	 	data->status = WEXITSTATUS(status);
+	if (WIFSIGNALED (status))
+		data->status = WTERMSIG(status);
 }
