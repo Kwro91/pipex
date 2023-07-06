@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2022/11/07 11:39:32 by besalort          #+#    #+#             */
+/*   Updated: 2022/11/28 15:01:22 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
+	char		*new_dest;
+	char		*new_src;
+	size_t		i;
+
+	new_dest = (char *)dest;
+	new_src = (char *)src;
+	i = 0;
+	while (i < n)
 	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
+		new_dest[i] = new_src[i];
+		i++;
 	}
+	return (dest);
 }

@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2022/11/21 13:49:39 by besalort          #+#    #+#             */
+/*   Updated: 2022/11/23 14:58:51 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
-	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
-	}
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

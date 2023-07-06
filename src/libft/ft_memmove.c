@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2022/11/07 14:43:35 by besalort          #+#    #+#             */
+/*   Updated: 2022/11/28 15:12:40 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
+	size_t	i;
+	char	*new_dest;
+	char	*new_src;
+
+	i = 0;
+	new_dest = (char *)dest;
+	new_src = (char *)src;
+	if (dest > src)
 	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
+		while (n > 0)
+		{
+			new_dest[n - 1] = new_src[n - 1];
+			n--;
+		}
 	}
+	else
+	{
+		while (i < n)
+		{
+			new_dest[i] = new_src[i];
+			i++;
+		}
+	}
+	return (dest);
 }

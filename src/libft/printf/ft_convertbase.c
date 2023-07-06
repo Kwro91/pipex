@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_convertbase.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2022/11/30 13:45:35 by besalort          #+#    #+#             */
+/*   Updated: 2023/04/07 13:31:14 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "ft_printf.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+int	ft_convertbase(unsigned int nb, int up)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
+	char	*base;
+	int		count;
+
+	count = 0;
+	base = "0123456789abcdef";
+	if (up == 1)
+		base = "0123456789ABCDEF";
+	if (nb > 15)
 	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
+		count += ft_convertbase(nb / 16, up);
+		count += ft_putchar_i(base[nb % 16]);
 	}
+	else
+		count += ft_putchar_i(base[nb]);
+	return (count);
 }

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_list_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2023/05/05 17:30:21 by besalort          #+#    #+#             */
+/*   Updated: 2023/07/06 16:16:31 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+t_lst	*createlist(int size, char **command)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
+	t_lst	*newlst;
+
+	newlst = NULL;
+	if (size > 0)
 	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
+		newlst = malloc(sizeof(t_lst));
+		if (!newlst)
+			return (NULL);
+		newlst->cmd = command[0];
+		newlst->command = ft_command(command[0]);
+		newlst->next = createlist(size - 1, command + 1);
+		if (newlst->next == NULL && (size -1) > 0)
+			return (free(newlst), NULL);
 	}
+	return (newlst);
 }

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 16:04:01 by besalort         ###   ########.fr       */
+/*   Created: 2022/08/23 15:02:48 by besalort          #+#    #+#             */
+/*   Updated: 2022/11/28 14:50:46 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	ft_open_files(t_pipex *data, char *file1, char *file2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (data->here_doc == 0)
-		data->file1.fd = open(file1, O_RDONLY);
-	else
-		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
-	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
-			S_IRWXU);
-	if (data->file1.fd < 0)
-	{
-		ft_msg(": no such file or directory: ");
-		ft_msg(file1);
-		ft_msg("\n");
-	}
+	size_t	i;
+	size_t	j;
+	char	*tab;
+
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	j = 0;
+	tab = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	while (s1[j])
+		tab[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		tab[i++] = s2[j++];
+	tab[i] = '\0';
+	return (tab);
 }
