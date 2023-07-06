@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:32:19 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/06 15:15:27 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:39:34 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	run_first(t_pipex *data, t_lst *tmp)
 {
 	if (pipe(data->pipes) < 0)
 		return (perror("Error pipe\n"), ft_free(data));
-	if (data->file1.fd >= 0)
+	if (data->fd_in >= 0)
 	{
 		ft_first_process(data, tmp->command, data->pipes);
 	}
@@ -59,7 +59,6 @@ void	wait_childs(t_pipex *data)
 		waitpid(-1, &status, 0);
 		if (i == 0)
 		{
-			data->fd_in = data->file1.fd;
 			close(data->pipes[1]);
 			close(data->pipes[0]);
 		}
