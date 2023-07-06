@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:08:01 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/04 17:32:20 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:46:05 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_free_paths(char **paths)
 		free(paths);
 }
 
-void	ft_free_here_doc()
+void	ft_free_here_doc(void)
 {
 	int	fd;
 
@@ -61,6 +61,6 @@ void	ft_free(t_pipex *data)
 	if (data->lst)
 		delete_list(data->lst);
 	close_give_fd(data->file1.fd, data->file2.fd);
-	ft_free_here_doc(data);
-	exit(0);
+	ft_free_here_doc();
+	exit(data->status);
 }

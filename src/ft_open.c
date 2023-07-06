@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:53:13 by besalort          #+#    #+#             */
-/*   Updated: 2023/06/19 17:52:49 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:15:55 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,10 @@ void	ft_open_files(t_pipex *data, char *file1, char *file2)
 		data->file1.fd = open(".here_doc_tmp", O_RDONLY);
 	data->file2.fd = open(file2, O_RDWR | O_TRUNC | O_CREAT,
 			S_IRWXU);
+	if (data->file1.fd < 0)
+	{
+		ft_msg("pipex: no such file or directory: ");
+		ft_msg(file1);
+		ft_msg("\n");
+	}
 }

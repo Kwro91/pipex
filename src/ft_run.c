@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:32:19 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/03 16:50:41 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:15:27 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	run_first(t_pipex *data, t_lst *tmp)
 {
 	if (pipe(data->pipes) < 0)
 		return (perror("Error pipe\n"), ft_free(data));
-	ft_first_process(data, tmp->command, data->pipes);
+	if (data->file1.fd >= 0)
+	{
+		ft_first_process(data, tmp->command, data->pipes);
+	}
 	close(data->pipes[1]);
 	close (data->fd_in);
 	data->fd_in = data->pipes[0];
@@ -44,32 +47,39 @@ void	run_last(t_pipex *data, t_lst *tmp)
 	close(data->fd_in);
 }
 
-void	run_processes(t_pipex *data)
+void	wait_childs(t_pipex *data)
 {
 	int		i;
 	int		status;
-	t_lst	*tmp;
 
 	i = 0;
 	status = 0;
-	data->fd_in = data->file1.fd;
-	tmp = data->lst;
-	run_first(data, tmp);
-	tmp = tmp->next;
-	tmp = run_other(data, tmp);
-	run_last(data, tmp);
 	while (i < data->cmds)
 	{
 		waitpid(-1, &status, 0);
 		if (i == 0)
 		{
+			data->fd_in = data->file1.fd;
 			close(data->pipes[1]);
 			close(data->pipes[0]);
 		}
 		i++;
 	}
 	if (WIFEXITED (status))
-	 	data->status = WEXITSTATUS(status);
+		data->status = WEXITSTATUS(status);
 	if (WIFSIGNALED (status))
 		data->status = WTERMSIG(status);
+}
+
+void	run_processes(t_pipex *data)
+{
+	t_lst	*tmp;
+
+	data->fd_in = data->file1.fd;
+	tmp = data->lst;
+	run_first(data, tmp);
+	tmp = tmp->next;
+	tmp = run_other(data, tmp);
+	run_last(data, tmp);
+	wait_childs(data);
 }

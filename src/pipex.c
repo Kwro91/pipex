@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:18:52 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/03 17:03:51 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:59:28 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_msg(char *msg)
 int	ft_pipex(int ac, char **av, char **env)
 {
 	t_pipex	data;
-	int value;
+	int		value;
 
 	data = (t_pipex){};
 	value = 0;

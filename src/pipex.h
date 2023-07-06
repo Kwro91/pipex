@@ -6,7 +6,7 @@
 /*   By: besalort <besalort@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:27:50 by besalort          #+#    #+#             */
-/*   Updated: 2023/07/04 17:42:44 by besalort         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:44:16 by besalort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_modify_cmd(char *cmd);
 char	**ft_command(char *command);
 // FT_FREE.C //
 void	close_give_fd(int fd1, int fd2);
-void	ft_free_here_doc();
+void	ft_free_here_doc(void);
 void	delete_list(t_lst *lst);
 void	ft_free_paths(char **paths);
 void	ft_free(t_pipex *data);
@@ -95,5 +95,6 @@ void	ft_processes(t_pipex *data, char **cmdp, int pipes[2]);
 void	run_first(t_pipex *data, t_lst *tmp);
 t_lst	*run_other(t_pipex *data, t_lst *tmp);
 void	run_last(t_pipex *data, t_lst *tmp);
+void	wait_childs(t_pipex *data);
 void	run_processes(t_pipex *data);
 #endif
